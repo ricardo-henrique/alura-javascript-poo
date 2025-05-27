@@ -1,29 +1,14 @@
-import { Client } from './Cliente.js';
+import { Account } from '../account.js';
+import { Client } from '../Cliente.js';
 
-export class ChainAccount {
+export class ChainAccount extends Account {
   static numberOfAccounts = 0;
-  agency;
-  _client;
-  // #balance = 0;
-  _balance = 0;
 
   constructor(client, agency) {
     this.agency = agency;
     this.client = client;
+    this._balance = 0;
     ChainAccount.numberOfAccounts += 1;
-  }
-
-  set client(newValue) {
-    if (newValue instanceof Client) {
-      this._client = newValue;
-    }
-  }
-  get client() {
-    return this._client;
-  }
-
-  get balance() {
-    return this._balance;
   }
 
   withdraw(value) {

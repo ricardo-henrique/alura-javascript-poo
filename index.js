@@ -1,13 +1,15 @@
 import { Client } from './Cliente.js';
-import { ChainAccount } from './chainAccount.js';
+import { SavingsAccount } from './accounts/SavingsAccount.js';
+import { ChainAccount } from './accounts/ChainAccount.js';
+import { Account } from './account.js';
 
 const client1 = new Client('Fulano', 11122233309);
-const client2 = new Client('Sicrano', 44411199934);
 
-const chainAccountFulano = new ChainAccount(client1, 1001);
+const chainAccountFulano = new Account(0, client1, 1001);
 chainAccountFulano.deposit(500);
+chainAccountFulano.withdraw(100);
 
-const account2 = new ChainAccount(client2, 102);
+const savingsAccount = new Account(50, client1, 1001);
 
-chainAccountFulano.transfer(200, account2);
-console.log(ChainAccount.numberOfAccounts);
+console.log(savingsAccount);
+console.log(chainAccountFulano);
