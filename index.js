@@ -1,43 +1,13 @@
-class Client {
-  name;
-  id;
-}
+import { Client } from './Cliente.js';
+import { ChainAccount } from './chainAccount.js';
 
-class chainAccount {
-  agency;
-  balance;
+const client1 = new Client('Fulano', 11122233309);
+const client2 = new Client('Sicrano', 44411199934);
 
-  withdraw(valor) {
-    if (this.balance >= valor) {
-      this.balance -= valor;
-    }
-  }
+const chainAccountFulano = new ChainAccount(client1, 1001);
+chainAccountFulano.deposit(500);
 
-  deposit(value) {
-    if (value > 0) {
-      this.balance += value;
-    }
-  }
-}
+const account2 = new ChainAccount(client2, 102);
 
-const client1 = new Client();
-client1.name = 'Fulano';
-client1.id = 11122233309;
-
-const client2 = new Client();
-client2.name = 'Sicrano';
-client2.id = 44455522278;
-
-const chainAccountFulano = new chainAccount();
-chainAccountFulano.balance = 0;
-chainAccountFulano.agency = 1001;
-
-chainAccountFulano.deposit(100);
-chainAccountFulano.deposit(200);
-chainAccountFulano.deposit(-1);
-
-chainAccountFulano.withdraw(50);
-
-console.log(chainAccountFulano.balance);
-console.log(client1);
-console.log(client2);
+chainAccountFulano.transfer(200, account2);
+console.log(ChainAccount.numberOfAccounts);
