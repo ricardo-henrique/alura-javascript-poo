@@ -1,9 +1,11 @@
 export class Account {
   constructor(initialBalance, client, agency) {
+    if (this.constructor == Account) {
+      throw new Error('You not allowed to instance this class directly');
+    }
     this._balance = initialBalance;
     this._client = client;
     this._agency = agency;
-    this._accountType = accountType;
   }
 
   set client(newValue) {
@@ -20,12 +22,16 @@ export class Account {
   }
 
   withdraw(value) {
-    let fee = 1;
+    throw new Error("this can't be called, because is a abstract method");
+  }
+
+  _withdraw(value, fee) {
     const amountWithdraw = fee * value;
     if (this._balance >= amountWithdraw) {
       this._balance -= amountWithdraw;
       return amountWithdraw;
     }
+    return 0;
   }
 
   deposit(value) {

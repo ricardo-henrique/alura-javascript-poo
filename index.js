@@ -1,15 +1,19 @@
-import { Client } from './Cliente.js';
-import { SavingsAccount } from './accounts/SavingsAccount.js';
-import { ChainAccount } from './accounts/ChainAccount.js';
-import { Account } from './account.js';
+import { Client } from './Client.js';
+import { Manager } from './employees/Manager.js';
+import { Director } from './employees/Director.js';
+import { AuthSystem } from './AuthSystem.js';
 
-const client1 = new Client('Fulano', 11122233309);
+const director = new Director('Beltrano', 10000, 12345678900);
+director.registerPassword('123456');
+const manager = new Manager('Fulano', 5000, 1239876528);
+manager.registerPassword('123987');
 
-const chainAccountFulano = new Account(0, client1, 1001);
-chainAccountFulano.deposit(500);
-chainAccountFulano.withdraw(100);
+const client = new Client('Sicrano', 64343515001, '456');
 
-const savingsAccount = new Account(50, client1, 1001);
+const isAuthenticatedDirector = AuthSystem.login(director, '123456');
+const isAuthenticatedManager = AuthSystem.login(manager, '123987');
+const isAuthenticatedClient = AuthSystem.login(client, '456');
 
-console.log(savingsAccount);
-console.log(chainAccountFulano);
+console.log('Diretor: ', isAuthenticatedDirector);
+console.log('Gerente: ', isAuthenticatedManager);
+console.log('Cliente: ', isAuthenticatedClient);

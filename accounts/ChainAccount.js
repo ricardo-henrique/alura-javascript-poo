@@ -1,30 +1,16 @@
-import { Account } from '../account.js';
-import { Client } from '../Cliente.js';
+import { Account } from './Account.js';
 
 export class ChainAccount extends Account {
   static numberOfAccounts = 0;
 
   constructor(client, agency) {
-    this.agency = agency;
-    this.client = client;
-    this._balance = 0;
+    super(0, client, agency);
     ChainAccount.numberOfAccounts += 1;
   }
 
+  // overwriting the withdraw's behavior
   withdraw(value) {
-    if (this._balance >= value) {
-      this._balance -= value;
-      return value;
-    }
-  }
-
-  deposit(value) {
-    if (value <= 0) return;
-    this._balance += value;
-  }
-
-  transfer(value, account) {
-    const amountWithdraw = this.withdraw(value);
-    account.deposit(amountWithdraw);
+    let tax = 1.1;
+    return this._withdraw(value, tax);
   }
 }
