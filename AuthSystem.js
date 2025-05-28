@@ -2,10 +2,9 @@ import { Client } from './Client.js';
 
 export class AuthSystem {
   static login(authenticable, password) {
-    if (authenticable instanceof Client)
-      if (AuthSystem.isAuthenticable(authenticable)) {
-        return authenticable.authenticate(password);
-      }
+    if (AuthSystem.isAuthenticable(authenticable)) {
+      return authenticable.authenticate(password);
+    }
     return false;
   }
 
